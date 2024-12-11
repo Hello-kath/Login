@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './components/LoginComponent';
 import Register from './components/RegisterComponent';
 import Home from './components/HomeComponent';
+import VerifyEmail from './components/Verificar'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/login" element={<Login />} />  {/* Ruta para Login */}
           <Route path="/register" element={<Register />} />  {/* Ruta para Registro */}
           <Route path="/home" element={<Home />} />  {/* Ruta para Registro */}
+          <Route path="/login/verify-email/:token" element={<VerifyEmail />} />
         </Routes>
     </Router>
   );
