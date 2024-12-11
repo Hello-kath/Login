@@ -147,6 +147,59 @@ app.get('/verify-email/:token', async (req, res) => {
     }
 });
 
+// Obtener todos los usuarios registrados
+app.get('/usuarios', async (req, res) => {
+    console.log("Ruta usuarios")
+    console.log(users)
+    try {
+        console.log(users)
+        res.status(200).json({ users });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener los usuarios', details: error.message });
+    }
+});
+
+// Editar un usuario
+app.put('/editar/:id', async (req, res) => {
+    const { id } = req.params;
+    const { username, email, password, isVerified } = req.body;
+
+    try {
+        const user = users.find(user => user.id === parseInt(id));
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado.' });
+        }
+
+        user.username = username || user.username;
+        user.email = email || user.email;
+        user.password = password ? await bcrypt.hash(password, 10) : user.password;
+        user.isVerified = isVerified !== undefined ? isVerified : user.isVerified;
+
+        res.status(200).json({ message: 'Usuario actualizado correctamente.', user });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar el usuario', details: error.message });
+    }
+});
+
+// Eliminar un usuario
+app.delete('/eliminar/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const userIndex = users.findIndex(user => user.id === parseInt(id));
+
+        if (userIndex === -1) {
+            return res.status(404).json({ error: 'Usuario no encontrado.' });
+        }
+
+        users.splice(userIndex, 1);
+        res.status(200).json({ message: 'Usuario eliminado correctamente.' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar el usuario', details: error.message });
+    }
+});
+
 // Middleware para proteger rutas con JWT
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];

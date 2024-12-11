@@ -23,7 +23,7 @@ const Login = () => {
       // Si la respuesta es exitosa, guarda el token y redirige al home
       const { token, user } = response.data;
       localStorage.setItem("token", token); // Guardar token en localStorage
-      navigate("/home"); // Redirigir a la página de inicio (ajusta según sea necesario)
+      navigate("/home"); // Redirigir a la página de inicio 
     } catch (err) {
       setError(err.response?.data?.error || "Error al iniciar sesión");
     }

@@ -22,13 +22,21 @@ function VerifyEmail() {
 
   return (
     <>
-      <main className="w-screen h-screen bg-[#0D0D28] flex items-center justify-center">
-        <div className="flex items-center justify-center w-1/3 h-24 text-center text-3xl bg-[#1d1f36] rounded-xl">
-          {message}
+      <main className="w-screen h-screen bg-[#f0eaee] flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-1/3 h-40 text-center text-3xl">
+          <div className="mb-4">
+            {message}  {/* Aquí aparece el mensaje */}
+          </div>
+          <img  
+            src="https://i.pinimg.com/736x/77/a7/3e/77a73ec9b018c740ce22aba9fee0e6b9.jpg" /* direcion d eimagen  */
+            alt="Descripción de la imagen"
+            className="w-full h-auto max-w-xs rounded-lg"  
+          />
         </div>
       </main>
     </>
   );
+  
 }
 
 export default VerifyEmail;
